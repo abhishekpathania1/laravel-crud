@@ -11,13 +11,30 @@
 </head>
 
 <body>
-
-    <section style="padding-top:60px;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">ANIME HUB</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/posts">LIST</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/add-post">Add New Anime</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <section style="padding-top:70px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="card-header">
-                       Edit POST
+                       Edit Anime <a href="/posts" class="btn btn-primary" style="margin-left:400px;">Posts</a>
                     </div>
                     <div class="card-body">
                         @if(Session::has('post_updated'))
@@ -25,16 +42,18 @@
                             {{Session::get('post_updated')}}
                         </div>
                         @endif
-                        <form method="POST" action="{{route('post.update')}}">
+                        <form method="POST" action="{{route('post.update',$post->id)}}">
                             @csrf
-                            <input type="hidden" name="id" value="{{$post->id}}" />
+                            
                             <div class="form-group">
-                                <label for="title">Post Title</label>
-                                <input type="text" name="title" class="form-control" placeholder="Enter Post Title" value="{{$post->title}}"/>
+                                <label for="title">Anime Title</label>
+                                <input type="text" name="title" class="form-control" placeholder="Enter Title"   value="{{ old('title') }}{{$post->title}}"/>
+                                <span style="color:red;">@error('title'){{$message}}@enderror</span>
                             </div>
                             <div class="form-group">
-                                <label for="body">POST Description</label>
-                                <textarea name="body" class="form-control" rows="3">{{$post->body}}</textarea>
+                                <label for="body">Anime Description</label>
+                                <textarea name="body" class="form-control" rows="3">{{ old('body') }}{{$post->body}}</textarea>
+                                <span style="color:red;">@error('body'){{$message}}@enderror</span>
                             </div>
                             <button type="submit" class="btn btn-warning">Update Post</button>
                         </form>

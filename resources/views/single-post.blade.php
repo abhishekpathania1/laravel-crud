@@ -11,23 +11,41 @@
 </head>
 
 <body>
-
-    <section style="padding-top:60px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">ANIME HUB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/posts">LIST</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add-post">Add New Anime</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section style="padding-top:70px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="card-header">
-                         POST Details
+                        POST Details
                     </div>
                     <div class="card-body">
-                      <h1>{{$post->title}}</h1>
-                      <p>{{$post->body}}</p>
+                        <div class="card-text">
+                            <h1>{{$post->title}}</h1>
+                            <p>{{$post->body}}</p>
+                        </div>
                     </div>
-                   
                 </div>
             </div>
         </div>
-     
+
     </section>
 
 

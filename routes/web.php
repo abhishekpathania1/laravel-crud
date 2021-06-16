@@ -33,6 +33,6 @@ Route::get('/delete-post/{id}',[PostController::class,'deletePost']);
 
 Route::get('/edit-post/{id}',[PostController::class,'editPost']);
 
-Route::post('/update-post',[PostController::class,'updatePost'])->name('post.update');
+Route::post('/edit-post/{id}',[PostController::class,'updatePost'])->name('post.update');
 
 

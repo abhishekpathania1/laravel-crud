@@ -13,6 +13,10 @@ class PostController extends Controller
     }
     public function  createPost(request $request)
     {
+        $request->validate([
+            'title'=>'required|unique:posts,title',
+            'body' => 'required|max:255'
+        ]);
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
@@ -22,7 +26,7 @@ class PostController extends Controller
 
     public function getPost()
     {
-        $posts = Post::orderBy('id','DESC')->get();
+        $posts = Post::paginate(5);
         return view('posts',compact('posts'));
     }
 
@@ -43,9 +47,13 @@ class PostController extends Controller
         return view('edit-post',compact('post'));
     }
 
-    public function updatePost(Request $request)
+    public function updatePost(Request $request,$id)
     {
-        $post = Post::find($request->id);
+         $request->validate([
+            'title'=>'required|unique:posts,title,'.$id,
+            'body' => 'required|max:255'
+        ]);
+        $post = Post::find($id);
         $post->title = $request->title;
         $post->body = $request->body;
         $post->save();
