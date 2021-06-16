@@ -59,4 +59,31 @@ class PostController extends Controller
         $post->save();
         return back()->with('post_updated','Post has been updated successfully!');
     }
+
+    public function getDeletePosts() {
+        $posts = Post::onlyTrashed()->paginate(10);
+
+        return view('deletedposts', compact('posts'))
+            ->with('i', (request()->input('page', 1) - 1) * 10);
+    }
+
+    public function restoreDeletedPosts($id) 
+    {
+
+        $posts = Post::where('id', $id)->withTrashed()->first();
+
+        $posts->restore();
+
+        return back()->with('post_restored','Post has been restored successfully!');
+    }
+
+    public function deletePermanently($id)
+    {
+        $project = Post::where('id', $id)->withTrashed()->first();
+
+        $project->forceDelete();
+
+        return back()->with('post_deleted', 'You successfully deleted the project from the Recycle Bin');
+
+    }
 }

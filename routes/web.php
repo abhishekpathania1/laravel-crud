@@ -19,20 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/students',[StudentController::class, 'fetchStudents']);
+Route::get('/add-post', [PostController::class, 'addPost']);
 
-Route::get('/add-post',[PostController::class,'addPost' ]);
+Route::post('/create-post', [PostController::class, 'createPost'])->name('post.create');
 
-Route::post('/create-post',[PostController::class,'createPost' ])->name('post.create');
+Route::get('/posts', [PostController::class, 'getPost']);
 
-Route::get('/posts',[PostController::class,'getPost']);
+Route::get('/posts/{id}', [PostController::class, 'getPostById']);
 
-Route::get('/posts/{id}',[PostController::class,'getPostById']);
+Route::get('/delete-post/{id}', [PostController::class, 'deletePost']);
 
-Route::get('/delete-post/{id}',[PostController::class,'deletePost']);
+Route::get('/edit-post/{id}', [PostController::class, 'editPost']);
 
-Route::get('/edit-post/{id}',[PostController::class,'editPost']);
+Route::post('/edit-post/{id}', [PostController::class, 'updatePost'])->name('post.update');
 
-Route::post('/edit-post/{id}',[PostController::class,'updatePost'])->name('post.update');
+Route::get('/deletedposts', [PostController::class, 'getDeleteposts'])->name('getDeleteposts');
 
+Route::get('/deletedposts/{id}', [PostController::class, 'restoreDeletedPosts'])->name('restoreDeletedPosts');
 
+Route::get('posts/retoreposts/{id}', [PostController::class, 'deletePermanently'])->name('deletePermanently');
